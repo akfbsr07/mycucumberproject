@@ -1,0 +1,82 @@
+*****selenium grid*****
+official documentation: https://www.selenium.dev/documentation/grid/getting_started/
+
+1. Pre-requisites
+*Java 11 or higher installed
+*Browser(s) installed - chrome and firefox
+*Browser driver(s)
+Selenium Manager will configure the drivers automatically if you add --selenium-manager true.
+Installed and on the PATH
+Download the Selenium Server jar file from the latest release
+------------------------------------------------------------------------------------------------------------------------
+2. Create a folder under project: SeleniumServer
+------------------------------------------------------------------------------------------------------------------------
+3. Download all below and put it in the SeleniumServer. Make sure the files are UNZIPPED
+   *Selenium Server: https://github.com/SeleniumHQ/selenium/releases/tag/selenium-4.15.0
+   *Chrome Driver: https://chromedriver.chromium.org/downloads
+   *Firefox Driver: https://github.com/mozilla/geckodriver/releases
+------------------------------------------------------------------------------------------------------------------------
+4. Open the intelliJ terminal or your local terminal, then navigate to SeleniumServer
+*ls: list of the child folders
+*cd: change directory (cd SeleniumServer)
+------------------------------------------------------------------------------------------------------------------------
+5. Run tests of selenium grid standalone mode
+*java -jar selenium-server-<version>.jar standalone
+*java -jar selenium-server-4.15.0.jar standalone
+
+Then you should see "Started Selenium Standalone 4.15.0" this message
+
+Troubleshooting:
+ *problem can be version issue, then use compatible versions for server and drivers
+ *check the code: java -jar selenium-server-4.15.0.jar standalone
+
+ To stop run CONTROL + C
+------------------------------------------------------------------------------------------------------------------------
+6. Create a feature file grid: grid.feature
+   @grid
+   Feature: grid_feature
+     @grid_chrome
+     Scenario: TC01_chrome_test
+       Given user navigates to "https://github.com/" using "chrome" browser
+       Then verify the title contains "GitHub"
+       Then close the remote driver
+------------------------------------------------------------------------------------------------------------------------
+7. OPTIONALLY CREATE A RUNNER FOR GRID. NOTE THAT WE CAN USE ONE OF THE EXISTING RUNNER AS WELL
+------------------------------------------------------------------------------------------------------------------------
+8. Create step definitions
+------------------------------------------------------------------------------------------------------------------------
+9. Complete step definitions
+------------------------------------------------------------------------------------------------------------------------
+10. Run your GridRunner, then you should run the test case successfully
+NOTE: Grid uses RemoteWebDriver
+------------------------------------------------------------------------------------------------------------------------
+11. KEY POINTS:
+    *What is selenium grid?
+     -selenium grid is one of the selenium components: IDE, WebDriver, RC, Grid
+    *What it is used for?
+     -remote testing
+     -cross browser testing(chrome, firefox,edge,...)
+     -parallel testing(When that framework designed for parallel testing, we can use grid for parallel testing)
+     -runs tests in different operating systems; IOS and WINDOWS
+    *How did you use it?
+     -I used grid in my project for cross browser testing
+    *How do you run test cases with grid?
+     -I run tests using selenium server with standalone mode
+     -First I run the server, then execute my test cases on the server using remote web driver
+     -In selenium grid 4, there are different options; 1. standalone(I preferred)  2.Hub and Node  3.Distributed mode
+    *What is HUB?
+     -Hub is the server that managed the nodes. We can only have one HUB
+    *What is NODE?
+     -Node is remote virtual machines. We can have multiple NODES
+    *Bonus: What is desired capabilities?
+     -Desired capabilities is used to add "key-value" pairs to add specific information(browser=chrome, version=119.0.6045.106, OS=Windows 10)
+     -NOTE that we use Options instead of desired capabilities(ChromeOptions, FirefoxOptions)
+
+
+
+
+
+
+
+
+
